@@ -124,109 +124,101 @@ export default function App() {
     <div className="min-h-screen bg-[#000000] text-white font-sans flex flex-col relative overflow-hidden">
       
       {/* Header - Transparent High-Contrast Glassmorphism */}
-      <header className="bg-black/80 border-b border-white/20 p-5 sticky top-0 z-50 shadow-[0_10px_40px_rgba(0,0,0,1)]">
+      <header className="bg-black/80 border-b border-white/20 p-4 md:p-5 sticky top-0 z-50 shadow-[0_10px_40px_rgba(0,0,0,1)]">
         <div className="w-[95%] max-w-[1800px] mx-auto flex items-center justify-between">
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-2 md:space-x-4">
             {/* Pulsing Luminous Icon */}
-            <Zap className={`${accent === 'neon-orange' ? 'text-[#ff6a00] filter-orange-glow' : accent === 'neon-pink' ? 'text-[#ff007f] filter-pink-glow' : 'text-[#a3e635] filter-lime-glow'} w-10 h-10 md:w-14 md:h-14 animate-pulse`} />
-            <h1 className={`text-3xl md:text-5xl lg:text-7xl font-extrabold tracking-widest ${accent}-text uppercase`}>
+            <Zap className={`${accent === 'neon-orange' ? 'text-[#ff6a00] filter-orange-glow' : accent === 'neon-pink' ? 'text-[#ff007f] filter-pink-glow' : 'text-[#a3e635] filter-lime-glow'} w-8 h-8 md:w-14 md:h-14 animate-pulse`} />
+            <h1 className={`text-xl md:text-5xl lg:text-7xl font-extrabold tracking-widest ${accent}-text uppercase`}>
               PRAISE NIGHT
             </h1>
           </div>
-          <div className={`w-4 h-4 md:w-6 md:h-6 rounded-full ${accent === 'neon-orange' ? 'bg-[#ff6a00] md:shadow-[0_0_15px_4px_rgba(255,106,0,0.8)]' : accent === 'neon-pink' ? 'bg-[#ff007f] md:shadow-[0_0_15px_4px_rgba(255,0,127,0.8)]' : 'bg-[#a3e635] md:shadow-[0_0_15px_4px_rgba(163,230,53,0.8)]'} animate-pulse`} />
+          <div className={`w-3 h-3 md:w-6 md:h-6 rounded-full ${accent === 'neon-orange' ? 'bg-[#ff6a00] md:shadow-[0_0_15px_4px_rgba(255,106,0,0.8)]' : accent === 'neon-pink' ? 'bg-[#ff007f] md:shadow-[0_0_15px_4px_rgba(255,0,127,0.8)]' : 'bg-[#a3e635] md:shadow-[0_0_15px_4px_rgba(163,230,53,0.8)]'} animate-pulse`} />
         </div>
         
-        {/* Error Notification Bar - High Contrast Red Alert Panel */}
-        {authError && (
-          <div className="w-[95%] max-w-[1800px] mx-auto mt-4 p-5 bg-red-950 border-2 border-red-500 rounded-xl text-red-200 text-center text-base md:text-2xl font-bold shadow-[0_0_30px_rgba(239,68,68,0.5)]">
-            ⚠️ CRITICAL CONFIG ERROR: {authError}
-          </div>
-        )}
-
-        {/* Navigation Tabs - High contrast, touch-friendly, ultra-bold landscape row */}
-        <div className="w-[95%] max-w-[1800px] mx-auto mt-8 flex space-x-3 md:space-x-6 p-2 bg-zinc-950 rounded-3xl border-2 border-white/10">
+        {/* Navigation Tabs - Refined to wrap beautifully on ultra-narrow portrait devices */}
+        <div className="w-[95%] max-w-[1800px] mx-auto mt-4 md:mt-8 flex space-x-1.5 md:space-x-6 p-1 md:p-2 bg-zinc-950 rounded-2xl md:rounded-3xl border md:border-2 border-white/10">
           <button 
             onClick={() => setActiveTab('praise')}
-            className={`flex-1 py-5 px-3 md:py-7 rounded-2xl font-extrabold flex items-center justify-center space-x-2 md:space-x-4 transition-all duration-300 active:scale-95 border-2 ${
+            className={`flex-1 py-3 px-1 md:py-7 rounded-xl md:rounded-2xl font-extrabold flex flex-col sm:flex-row items-center justify-center space-y-1 sm:space-y-0 sm:space-x-2 md:space-x-4 transition-all duration-300 active:scale-95 border md:border-2 ${
               activeTab === 'praise' 
               ? 'bg-[#ff6a00]/20 border-[#ff6a00] text-[#ff6a00] neon-orange-text' 
               : 'bg-zinc-900 text-zinc-400 border-transparent hover:border-zinc-700'
             }`}
           >
-            <Mic className={`w-8 h-8 md:w-12 md:h-12 ${activeTab === 'praise' ? 'text-[#ff6a00] animate-dance' : 'text-zinc-400'}`} />
-            <span className="text-base md:text-3xl lg:text-4xl tracking-wider">PRAISES</span>
+            <Mic className={`w-5 h-5 md:w-12 md:h-12 ${activeTab === 'praise' ? 'text-[#ff6a00] animate-dance' : 'text-zinc-400'}`} />
+            <span className="text-[10px] sm:text-base md:text-3xl lg:text-4xl tracking-wider">PRAISES</span>
           </button>
           <button 
             onClick={() => setActiveTab('questions')}
-            className={`flex-1 py-5 px-3 md:py-7 rounded-2xl font-extrabold flex items-center justify-center space-x-2 md:space-x-4 transition-all duration-300 active:scale-95 border-2 ${
+            className={`flex-1 py-3 px-1 md:py-7 rounded-xl md:rounded-2xl font-extrabold flex flex-col sm:flex-row items-center justify-center space-y-1 sm:space-y-0 sm:space-x-2 md:space-x-4 transition-all duration-300 active:scale-95 border md:border-2 ${
               activeTab === 'questions' 
               ? 'bg-[#ff007f]/20 border-[#ff007f] text-[#ff007f] neon-pink-text' 
               : 'bg-zinc-900 text-zinc-400 border-transparent hover:border-zinc-700'
             }`}
           >
-            <HelpCircle className={`w-8 h-8 md:w-12 md:h-12 ${activeTab === 'questions' ? 'text-[#ff007f] animate-pulse-soft' : 'text-zinc-400'}`} />
-            <span className="text-base md:text-3xl lg:text-4xl tracking-wider">QUESTIONS</span>
+            <HelpCircle className={`w-5 h-5 md:w-12 md:h-12 ${activeTab === 'questions' ? 'text-[#ff007f] animate-pulse-soft' : 'text-zinc-400'}`} />
+            <span className="text-[10px] sm:text-base md:text-3xl lg:text-4xl tracking-wider">QUESTIONS</span>
           </button>
           <button 
             onClick={() => setActiveTab('devotion')}
-            className={`flex-1 py-5 px-3 md:py-7 rounded-2xl font-extrabold flex items-center justify-center space-x-2 md:space-x-4 transition-all duration-300 active:scale-95 border-2 ${
+            className={`flex-1 py-3 px-1 md:py-7 rounded-xl md:rounded-2xl font-extrabold flex flex-col sm:flex-row items-center justify-center space-y-1 sm:space-y-0 sm:space-x-2 md:space-x-4 transition-all duration-300 active:scale-95 border md:border-2 ${
               activeTab === 'devotion' 
               ? 'bg-[#a3e635]/20 border-[#a3e635] text-[#a3e635] neon-lime-text' 
               : 'bg-zinc-900 text-zinc-400 border-transparent hover:border-zinc-700'
             }`}
           >
-            <BookOpen className={`w-8 h-8 md:w-12 md:h-12 ${activeTab === 'devotion' ? 'text-[#a3e635] animate-float' : 'text-zinc-400'}`} />
-            <span className="text-base md:text-3xl lg:text-4xl tracking-wider">LEARN MORE</span>
+            <BookOpen className={`w-5 h-5 md:w-12 md:h-12 ${activeTab === 'devotion' ? 'text-[#a3e635] animate-float' : 'text-zinc-400'}`} />
+            <span className="text-[10px] sm:text-base md:text-3xl lg:text-4xl tracking-wider">LEARN MORE</span>
           </button>
         </div>
       </header>
 
       {/* Main Content Area - WIDE SCREEN FOR LANDSCAPE PROJECTORS */}
-      <main className="flex-1 w-[95%] max-w-[1800px] mx-auto p-5 md:p-8 flex flex-col z-10 relative">
+      <main className="flex-1 w-[95%] max-w-[1800px] mx-auto p-4 md:p-8 flex flex-col z-10 relative">
         
         {/* PRAISES TAB */}
         {activeTab === 'praise' && (
           <div className="flex flex-col h-full animate-fade-in">
             <div className="mb-6 md:mb-12 text-center animate-slide-down">
-              <h2 className="text-3xl md:text-6xl text-[#ff6a00] font-black tracking-widest neon-orange-text uppercase">SHARE YOUR TESTIMONIES</h2>
-              <p className="text-[#ffd0b0] font-extrabold text-lg md:text-3xl mt-3 tracking-wide">POSTS SYNC INSTANTLY ON THE PRIMARY DISPLAY</p>
+              <h2 className="text-2xl md:text-6xl text-[#ff6a00] font-black tracking-widest neon-orange-text uppercase">SHARE YOUR TESTIMONIES</h2>
+              <p className="text-[#ffd0b0] font-extrabold text-sm md:text-3xl mt-2 tracking-wide">POSTS SYNC INSTANTLY ON THE PRIMARY DISPLAY</p>
             </div>
             
-            <div className="flex-1 space-y-6 md:space-y-10 pb-36 md:pb-48">
+            <div className="flex-1 space-y-4 md:space-y-10 pb-32 md:pb-48">
               {comments.map((comment, index) => (
                 <div 
                   key={comment.id} 
-                  className="bg-zinc-950 p-6 md:p-12 rounded-3xl border-3 border-[#ff6a00]/40 hover:border-[#ff6a00] md:shadow-[0_0_35px_rgba(255,106,0,0.25)] shadow-none transition-all duration-300 flex items-center group opacity-0 animate-slide-up-fade"
+                  className="bg-zinc-950 p-4 md:p-12 rounded-2xl md:rounded-3xl border md:border-3 border-[#ff6a00]/40 hover:border-[#ff6a00] md:shadow-[0_0_35px_rgba(255,106,0,0.25)] shadow-none transition-all duration-300 flex items-center group opacity-0 animate-slide-up-fade"
                   style={{ animationDelay: `${index * 0.08}s`, animationFillMode: 'forwards' }}
                 >
-                  <div className="mr-6 md:mr-10 p-4 md:p-6 rounded-full bg-orange-950/60 border-2 border-[#ff6a00]/50 group-hover:scale-110 transition-transform">
-                    <Heart className="text-[#ff6a00] w-8 h-8 md:w-14 md:h-14 md:filter-orange-glow" />
+                  <div className="mr-4 md:mr-10 p-3 md:p-6 rounded-full bg-orange-950/60 border border-[#ff6a00]/50 group-hover:scale-110 transition-transform">
+                    <Heart className="text-[#ff6a00] w-6 h-6 md:w-14 md:h-14 md:filter-orange-glow" />
                   </div>
-                  {/* PROJECTOR ULTRA CONTRAST GOLD TEXT WITH NEON TEXT SHADOW */}
-                  <span className="text-2xl md:text-5xl lg:text-6xl leading-relaxed font-black text-[#facc15] neon-gold-text">
+                  <span className="text-lg md:text-5xl lg:text-6xl leading-relaxed font-black text-[#facc15] neon-gold-text">
                     {comment.text}
                   </span>
                 </div>
               ))}
               {comments.length === 0 && (
-                <div className="text-center bg-zinc-950 p-12 md:p-24 rounded-3xl border-3 border-[#ff6a00]/20 text-orange-200/60 text-xl md:text-4xl italic font-bold opacity-0 animate-slide-up-fade" style={{ animationFillMode: 'forwards' }}>
+                <div className="text-center bg-zinc-950 p-10 md:p-24 rounded-2xl md:rounded-3xl border md:border-3 border-[#ff6a00]/20 text-orange-200/60 text-base md:text-4xl italic font-bold opacity-0 animate-slide-up-fade" style={{ animationFillMode: 'forwards' }}>
                   Awaiting testimonies. Be the first to share!
                 </div>
               )}
             </div>
 
             {/* Input Form at Bottom */}
-            <form onSubmit={handleCommentSubmit} className="fixed bottom-0 left-0 right-0 p-5 md:p-8 z-40 bg-black/95 border-t border-white/10">
-              <div className="w-[95%] max-w-[1800px] mx-auto p-4 md:p-6 bg-zinc-950 border-2 border-white/20 rounded-3xl flex space-x-3 md:space-x-6">
+            <form onSubmit={handleCommentSubmit} className="fixed bottom-0 left-0 right-0 p-4 md:p-8 z-40 bg-black/95 border-t border-white/10">
+              <div className="w-[95%] max-w-[1800px] mx-auto p-2.5 md:p-6 bg-zinc-950 border border-white/20 rounded-2xl md:rounded-3xl flex space-x-2 md:space-x-6">
                 <input 
                   type="text" 
                   value={newComment}
                   onChange={(e) => setNewComment(e.target.value)}
-                  placeholder="Type a celebratory praise report..." 
-                  className="flex-1 bg-black text-[#ffea80] border-2 border-zinc-700 rounded-2xl md:rounded-3xl px-6 md:px-10 py-5 md:py-8 focus:outline-none focus:border-[#ff6a00] text-xl md:text-3xl font-extrabold placeholder:text-zinc-600 focus:ring-4 focus:ring-[#ff6a00]/30"
+                  placeholder="Type a praise report..." 
+                  className="flex-1 bg-black text-[#ffea80] border border-zinc-700 rounded-xl md:rounded-3xl px-4 md:px-10 py-3 md:py-8 focus:outline-none focus:border-[#ff6a00] text-sm md:text-3xl font-extrabold placeholder:text-zinc-600 focus:ring-2 focus:ring-[#ff6a00]/30"
                 />
-                <button type="submit" className="bg-[#ff6a00] text-black px-8 md:px-16 rounded-2xl md:rounded-3xl font-black hover:bg-orange-400 text-lg md:text-3xl flex items-center justify-center group active:scale-95 transition-all">
-                  <Send className="w-8 h-8 md:w-12 md:h-12 group-hover:rotate-12 transition-transform" />
+                <button type="submit" className="bg-[#ff6a00] text-black px-4 md:px-16 rounded-xl md:rounded-3xl font-black hover:bg-orange-400 text-sm md:text-3xl flex items-center justify-center group active:scale-95 transition-all">
+                  <Send className="w-5 h-5 md:w-12 md:h-12 group-hover:rotate-12 transition-transform" />
                 </button>
               </div>
             </form>
@@ -237,95 +229,94 @@ export default function App() {
         {activeTab === 'questions' && (
           <div className="flex flex-col h-full animate-fade-in">
             <div className="mb-6 md:mb-12 text-center animate-slide-down">
-              <h2 className="text-3xl md:text-6xl text-[#ff007f] font-black tracking-widest neon-pink-text uppercase">ASK ANONYMOUSLY</h2>
-              <p className="text-[#ffd6e8] font-extrabold text-lg md:text-3xl mt-3 tracking-wide">QUERIES ARE DISPLAYED DIRECTLY TO THE HOST</p>
+              <h2 className="text-2xl md:text-6xl text-[#ff007f] font-black tracking-widest neon-pink-text uppercase">ASK ANONYMOUSLY</h2>
+              <p className="text-[#ffd6e8] font-extrabold text-sm md:text-3xl mt-2 tracking-wide">QUERIES ARE DISPLAYED DIRECTLY TO THE HOST</p>
             </div>
             
-            <div className="flex-1 space-y-6 md:space-y-10 pb-36 md:pb-48">
+            <div className="flex-1 space-y-4 md:space-y-10 pb-32 md:pb-48">
               {questions.map((question, index) => (
                 <div 
                   key={question.id} 
-                  className="bg-zinc-950 p-6 md:p-12 rounded-3xl border-3 border-[#ff007f]/40 hover:border-[#ff007f] md:shadow-[0_0_35px_rgba(255,0,127,0.25)] shadow-none transition-all duration-300 flex items-start group opacity-0 animate-slide-up-fade"
+                  className="bg-zinc-950 p-4 md:p-12 rounded-2xl md:rounded-3xl border md:border-3 border-[#ff007f]/40 hover:border-[#ff007f] md:shadow-[0_0_35px_rgba(255,0,127,0.25)] shadow-none transition-all duration-300 flex items-start group opacity-0 animate-slide-up-fade"
                   style={{ animationDelay: `${index * 0.08}s`, animationFillMode: 'forwards' }}
                 >
-                  <div className="mr-6 md:mr-10 p-4 md:p-6 rounded-xl bg-pink-950/60 border-2 border-[#ff007f]/50 flex-shrink-0 mt-1 group-hover:scale-110 transition-transform">
-                    <HelpCircle className="text-[#ff007f] w-8 h-8 md:w-14 md:h-14 md:filter-pink-glow" />
+                  <div className="mr-4 md:mr-10 p-3 md:p-6 rounded-xl bg-pink-950/60 border border-[#ff007f]/50 flex-shrink-0 mt-1 group-hover:scale-110 transition-transform">
+                    <HelpCircle className="text-[#ff007f] w-6 h-6 md:w-14 md:h-14 md:filter-pink-glow" />
                   </div>
-                  {/* PROJECTOR ULTRA CONTRAST GOLD TEXT WITH NEON TEXT SHADOW */}
-                  <span className="text-2xl md:text-5xl lg:text-6xl leading-relaxed font-black text-[#facc15] neon-gold-text">
+                  <span className="text-lg md:text-5xl lg:text-6xl leading-relaxed font-black text-[#facc15] neon-gold-text">
                     {question.text}
                   </span>
                 </div>
               ))}
               {questions.length === 0 && (
-                <div className="text-center bg-zinc-950 p-12 md:p-24 rounded-3xl border-3 border-[#ff007f]/20 text-pink-200/60 text-xl md:text-4xl italic font-bold opacity-0 animate-slide-up-fade" style={{ animationFillMode: 'forwards' }}>
+                <div className="text-center bg-zinc-950 p-10 md:p-24 rounded-2xl md:rounded-3xl border md:border-3 border-[#ff007f]/20 text-pink-200/60 text-base md:text-4xl italic font-bold opacity-0 animate-slide-up-fade" style={{ animationFillMode: 'forwards' }}>
                   Awaiting incoming questions. Ask away!
                 </div>
               )}
             </div>
 
             {/* Input Form at Bottom */}
-            <form onSubmit={handleQuestionSubmit} className="fixed bottom-0 left-0 right-0 p-5 md:p-8 z-40 bg-black/95 border-t border-white/10">
-              <div className="w-[95%] max-w-[1800px] mx-auto p-4 md:p-6 bg-zinc-950 border-2 border-white/20 rounded-3xl flex space-x-3 md:space-x-6">
+            <form onSubmit={handleQuestionSubmit} className="fixed bottom-0 left-0 right-0 p-4 md:p-8 z-40 bg-black/95 border-t border-white/10">
+              <div className="w-[95%] max-w-[1800px] mx-auto p-2.5 md:p-6 bg-zinc-950 border border-white/20 rounded-2xl md:rounded-3xl flex space-x-2 md:space-x-6">
                 <input 
                   type="text" 
                   value={newQuestion}
                   onChange={(e) => setNewQuestion(e.target.value)}
                   placeholder="Pose an anonymous question..." 
-                  className="flex-1 bg-black text-[#ffea80] border-2 border-zinc-700 rounded-2xl md:rounded-3xl px-6 md:px-10 py-5 md:py-8 focus:outline-none focus:border-[#ff007f] text-xl md:text-3xl font-extrabold placeholder:text-zinc-600 focus:ring-4 focus:ring-[#ff007f]/30"
+                  className="flex-1 bg-black text-[#ffea80] border border-zinc-700 rounded-xl md:rounded-3xl px-4 md:px-10 py-3 md:py-8 focus:outline-none focus:border-[#ff007f] text-sm md:text-3xl font-extrabold placeholder:text-zinc-600 focus:ring-2 focus:ring-[#ff007f]/30"
                 />
-                <button type="submit" className="bg-[#ff007f] text-white px-8 md:px-16 rounded-2xl md:rounded-3xl font-black hover:bg-pink-400 text-lg md:text-3xl flex items-center justify-center group active:scale-95 transition-all">
-                  <Send className="w-8 h-8 md:w-12 md:h-12 group-hover:rotate-12 transition-transform" />
+                <button type="submit" className="bg-[#ff007f] text-white px-4 md:px-16 rounded-xl md:rounded-3xl font-black hover:bg-pink-400 text-sm md:text-3xl flex items-center justify-center group active:scale-95 transition-all">
+                  <Send className="w-5 h-5 md:w-12 md:h-12 group-hover:rotate-12 transition-transform" />
                 </button>
               </div>
             </form>
           </div>
         )}
 
-        {/* DEVOTION TAB */}
+        {/* DEVOTION TAB (Optimized with responsive, high-fidelity spacing and scaled font layouts) */}
         {activeTab === 'devotion' && (
-          <div className="bg-zinc-950 pt-16 pb-8 px-6 md:p-20 rounded-3xl border-4 border-[#a3e635] mb-8 mt-6 opacity-0 animate-slide-up-fade relative md:shadow-[0_0_50px_rgba(163,230,53,0.3)] shadow-none" style={{ animationFillMode: 'forwards' }}>
-            {/* Projector System Details Header - Repositioned cleanly to avoid overlaying title text on mobile */}
-            <div className="absolute top-4 right-6 text-xs md:text-2xl font-mono text-[#a3e635] tracking-widest font-extrabold neon-lime-text">WISDOM // LOG [0100]</div>
+          <div className="bg-zinc-950 pt-12 pb-6 px-4 md:p-20 rounded-2xl md:rounded-3xl border md:border-4 border-[#a3e635] mb-8 mt-4 opacity-0 animate-slide-up-fade relative md:shadow-[0_0_50px_rgba(163,230,53,0.3)] shadow-none" style={{ animationFillMode: 'forwards' }}>
+            {/* Projector System Details Header */}
+            <div className="absolute top-3 right-4 text-[9px] md:text-2xl font-mono text-[#a3e635] tracking-widest font-extrabold neon-lime-text">WISDOM // LOG [0100]</div>
             
-            <h2 className="text-4xl md:text-7xl lg:text-8xl font-black text-[#a3e635] mt-4 mb-12 text-center tracking-widest border-b-4 border-[#a3e635]/30 pb-10 uppercase neon-lime-text">What is True Praise?</h2>
+            <h2 className="text-xl md:text-7xl lg:text-8xl font-black text-[#a3e635] mt-2 mb-6 md:mb-12 text-center tracking-widest border-b-2 md:border-b-4 border-[#a3e635]/30 pb-4 md:pb-10 uppercase neon-lime-text">What is True Praise?</h2>
             
-            <div className="space-y-12 md:space-y-20 text-2xl md:text-4xl lg:text-5xl text-white leading-relaxed font-bold">
-              <div className="flex items-start space-x-6">
-                <span className="text-6xl md:text-8xl font-black text-[#a3e635] neon-lime-text">//</span>
-                <p>
+            <div className="space-y-6 md:space-y-16 text-sm md:text-4xl lg:text-5xl text-white leading-relaxed font-bold">
+              <div className="flex items-start space-x-3 md:space-x-6">
+                <span className="text-3xl md:text-8xl font-black text-[#a3e635] neon-lime-text leading-none">//</span>
+                <p className="pt-1 md:pt-4">
                   In the Bible, one of the primary Hebrew words for praise is <strong className="text-[#a3e635] neon-lime-text">Halal</strong> (הָלַל). It's where we get the word "Hallelujah."
                 </p>
               </div>
               
-              <div className="bg-[#a3e635]/10 p-10 md:p-16 rounded-3xl border-3 border-[#a3e635] relative overflow-hidden">
-                <p className="italic text-[#facc15] text-3xl md:text-5xl lg:text-6xl relative z-10 leading-snug font-extrabold neon-gold-text">
+              <div className="bg-[#a3e635]/10 p-5 md:p-16 rounded-xl md:rounded-3xl border md:border-3 border-[#a3e635] relative overflow-hidden">
+                <p className="italic text-[#facc15] text-base md:text-5xl lg:text-6xl relative z-10 leading-snug font-extrabold neon-gold-text">
                   "Halal means to be clear, to shine, to boast, to show, to rave, to celebrate, and to be clamorously foolish."
                 </p>
               </div>
 
-              <p className="text-zinc-100">
+              <p className="text-zinc-200 font-semibold">
                 Praise isn't just about singing quiet songs; it is a visible, audible, and sometimes radical declaration of how good God is. It's boasting about God's track record!
               </p>
 
-              <h3 className="text-4xl md:text-6xl font-black text-[#a3e635] pt-12 tracking-wide flex items-center space-x-5 border-t border-zinc-800">
-                <Zap className="text-[#a3e635] w-12 h-12 md:w-20 md:h-20 animate-pulse flex-shrink-0 md:filter-lime-glow" />
+              <h3 className="text-lg md:text-6xl font-black text-[#a3e635] pt-6 md:pt-12 tracking-wide flex items-center space-x-3 md:space-x-5 border-t border-zinc-800">
+                <Zap className="text-[#a3e635] w-6 h-6 md:w-20 md:h-20 animate-pulse flex-shrink-0 md:filter-lime-glow" />
                 <span className="neon-lime-text">PSALM 100 (A Psalm for Giving Thanks)</span>
               </h3>
               
-              <blockquote className="border-l-12 border-[#a3e635] pl-10 md:pl-16 py-10 my-12 bg-zinc-900 rounded-r-3xl italic space-y-8 font-extrabold text-zinc-100 text-3xl md:text-5xl md:shadow-[0_0_30px_rgba(163,230,53,0.15)] shadow-none">
-                <p><strong className="text-[#a3e635] mr-6 neon-lime-text">1</strong> Make a joyful noise to the LORD, all the earth!</p>
-                <p><strong className="text-[#a3e635] mr-6 neon-lime-text">2</strong> Serve the LORD with gladness! Come into his presence with singing!</p>
-                <p><strong className="text-[#a3e635] mr-6 neon-lime-text">3</strong> Know that the LORD, he is God! It is he who made us, and we are his; we are his people, and the sheep of his pasture.</p>
-                <p><strong className="text-[#a3e635] mr-6 neon-lime-text">4</strong> Enter his gates with thanksgiving, and his courts with praise! Give thanks to him; bless his name!</p>
-                <p><strong className="text-[#a3e635] mr-6 neon-lime-text">5</strong> For the LORD is good; his steadfast love endures forever, and his faithfulness to all generations.</p>
+              <blockquote className="border-l-4 md:border-l-12 border-[#a3e635] pl-4 md:pl-16 py-4 md:py-10 my-4 md:my-12 bg-zinc-900 rounded-r-xl md:rounded-r-3xl italic space-y-4 md:space-y-8 font-extrabold text-zinc-100 text-sm md:text-4xl lg:text-5xl md:shadow-[0_0_30px_rgba(163,230,53,0.15)] shadow-none">
+                <p><strong className="text-[#a3e635] mr-2 md:mr-6 neon-lime-text">1</strong> Make a joyful noise to the LORD, all the earth!</p>
+                <p><strong className="text-[#a3e635] mr-2 md:mr-6 neon-lime-text">2</strong> Serve the LORD with gladness! Come into his presence with singing!</p>
+                <p><strong className="text-[#a3e635] mr-2 md:mr-6 neon-lime-text">3</strong> Know that the LORD, he is God! It is he who made us, and we are his; we are his people, and the sheep of his pasture.</p>
+                <p><strong className="text-[#a3e635] mr-2 md:mr-6 neon-lime-text">4</strong> Enter his gates with thanksgiving, and his courts with praise! Give thanks to him; bless his name!</p>
+                <p><strong className="text-[#a3e635] mr-2 md:mr-6 neon-lime-text">5</strong> For the LORD is good; his steadfast love endures forever, and his faithfulness to all generations.</p>
               </blockquote>
 
-              <h3 className="text-4xl md:text-6xl font-black text-[#a3e635] pt-12 tracking-wide flex items-center space-x-5 border-t border-zinc-800">
-                <Sparkles className="text-[#a3e635] w-12 h-12 md:w-20 md:h-20 animate-pulse flex-shrink-0 md:filter-lime-glow" />
+              <h3 className="text-lg md:text-6xl font-black text-[#a3e635] pt-6 md:pt-12 tracking-wide flex items-center space-x-3 md:space-x-5 border-t border-zinc-800">
+                <Sparkles className="text-[#a3e635] w-6 h-6 md:w-20 md:h-20 animate-pulse flex-shrink-0 md:filter-lime-glow" />
                 <span className="neon-lime-text">PERSONAL REFLECTION</span>
               </h3>
-              <ul className="list-disc pl-12 md:pl-20 space-y-8 text-zinc-200">
+              <ul className="list-disc pl-6 md:pl-20 space-y-4 md:space-y-8 text-zinc-200 text-base md:text-3xl">
                 <li>What has God done in your life recently that makes you want to boast about Him?</li>
                 <li>How can you incorporate "Halal" (celebratory, outward praise) into your daily life this week?</li>
               </ul>
