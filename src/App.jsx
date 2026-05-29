@@ -6,7 +6,10 @@ import {
   Heart,
   Zap,
   Mic,
-  Sparkles
+  Sparkles,
+  Trash2,
+  Lock,
+  X
 } from 'lucide-react';
 import { initializeApp } from 'firebase/app';
 import { 
@@ -16,7 +19,9 @@ import {
   query, 
   orderBy, 
   onSnapshot, 
-  serverTimestamp 
+  serverTimestamp,
+  doc,
+  deleteDoc
 } from 'firebase/firestore';
 import { getAuth, signInAnonymously } from 'firebase/auth';
 
@@ -45,6 +50,13 @@ export default function App() {
   const [newQuestion, setNewQuestion] = useState('');
   const [userId, setUserId] = useState(null);
   const [authError, setAuthError] = useState(null);
+
+  // Security Gate & Reset States
+  const [showResetModal, setShowResetModal] = useState(false);
+  const [passwordInput, setPasswordInput] = useState('');
+  const [resetError, setResetError] = useState('');
+  const [resetSuccess, setResetSuccess] = useState(false);
+  const [isResetting, setIsResetting] = useState(false);
 
   useEffect(() => {
     // Sign in anonymously so users can post without an account
@@ -110,6 +122,50 @@ export default function App() {
     }
   };
 
+  // Secure Purging of both collection sets
+  const handleAuthAndReset = async (e) => {
+    e.preventDefault();
+    setResetError('');
+    setResetSuccess(false);
+
+    if (passwordInput !== 'mathurin') {
+      setResetError('INVALID SECURITY PASSPHRASE - ACCESS DENIED');
+      return;
+    }
+
+    setIsResetting(true);
+    try {
+      const deletePromises = [];
+      
+      // Queue comments/praises deletions
+      comments.forEach(comment => {
+        deletePromises.push(deleteDoc(doc(db, 'praises', comment.id)));
+      });
+
+      // Queue questions deletions
+      questions.forEach(question => {
+        deletePromises.push(deleteDoc(doc(db, 'questions', question.id)));
+      });
+
+      await Promise.all(deletePromises);
+      
+      setResetSuccess(true);
+      setPasswordInput('');
+      
+      // Auto-dismiss modal on complete
+      setTimeout(() => {
+        setShowResetModal(false);
+        setResetSuccess(false);
+      }, 1500);
+
+    } catch (error) {
+      console.error("Database purge failed: ", error);
+      setResetError('SYSTEM EXCEPTION - UNABLE TO OVERWRITE DATABASE');
+    } finally {
+      setIsResetting(false);
+    }
+  };
+
   // High contrast palette tailored specifically for projector settings
   const getAccentColor = () => {
     if (activeTab === 'praise') return 'neon-orange';
@@ -133,7 +189,23 @@ export default function App() {
               PRAISE NIGHT
             </h1>
           </div>
-          <div className={`w-3 h-3 md:w-6 md:h-6 rounded-full ${accent === 'neon-orange' ? 'bg-[#ff6a00] md:shadow-[0_0_15px_4px_rgba(255,106,0,0.8)]' : accent === 'neon-pink' ? 'bg-[#ff007f] md:shadow-[0_0_15px_4px_rgba(255,0,127,0.8)]' : 'bg-[#a3e635] md:shadow-[0_0_15px_4px_rgba(163,230,53,0.8)]'} animate-pulse`} />
+          
+          {/* Action Tools & Pulse Indicator */}
+          <div className="flex items-center space-x-3 md:space-x-6">
+            <button
+              onClick={() => {
+                setShowResetModal(true);
+                setResetError('');
+                setResetSuccess(false);
+                setPasswordInput('');
+              }}
+              className="p-2 md:p-3 rounded-xl bg-red-950/40 border border-red-500/40 text-red-500 hover:bg-red-500 hover:text-black hover:shadow-[0_0_15px_rgba(239,68,68,0.5)] transition-all flex items-center justify-center group active:scale-95"
+              title="Database Reset Console"
+            >
+              <Trash2 className="w-5 h-5 md:w-8 md:h-8 group-hover:scale-110 transition-transform" />
+            </button>
+            <div className={`w-3 h-3 md:w-6 md:h-6 rounded-full ${accent === 'neon-orange' ? 'bg-[#ff6a00] md:shadow-[0_0_15px_4px_rgba(255,106,0,0.8)]' : accent === 'neon-pink' ? 'bg-[#ff007f] md:shadow-[0_0_15px_4px_rgba(255,0,127,0.8)]' : 'bg-[#a3e635] md:shadow-[0_0_15px_4px_rgba(163,230,53,0.8)]'} animate-pulse`} />
+          </div>
         </div>
         
         {/* Navigation Tabs - Refined to wrap beautifully on ultra-narrow portrait devices */}
@@ -273,7 +345,7 @@ export default function App() {
           </div>
         )}
 
-        {/* DEVOTION TAB (Optimized with responsive, high-fidelity spacing and scaled font layouts) */}
+        {/* DEVOTION TAB */}
         {activeTab === 'devotion' && (
           <div className="bg-zinc-950 pt-12 pb-6 px-4 md:p-20 rounded-2xl md:rounded-3xl border md:border-4 border-[#a3e635] mb-8 mt-4 opacity-0 animate-slide-up-fade relative md:shadow-[0_0_50px_rgba(163,230,53,0.3)] shadow-none" style={{ animationFillMode: 'forwards' }}>
             {/* Projector System Details Header */}
@@ -324,6 +396,83 @@ export default function App() {
           </div>
         )}
       </main>
+
+      {/* SECURITY OVERLAY MODAL */}
+      {showResetModal && (
+        <div className="fixed inset-0 bg-black/95 backdrop-blur-md z-50 flex items-center justify-center p-4">
+          <div className="w-full max-w-2xl bg-zinc-950 border-4 border-[#ef4444] rounded-3xl p-6 md:p-12 md:shadow-[0_0_50px_rgba(239,68,68,0.4)] relative">
+            
+            <button 
+              onClick={() => {
+                setShowResetModal(false);
+                setResetError('');
+                setResetSuccess(false);
+              }}
+              className="absolute top-4 right-4 md:top-6 md:right-6 text-zinc-400 hover:text-white transition-colors"
+            >
+              <X className="w-8 h-8" />
+            </button>
+
+            <div className="flex flex-col items-center text-center">
+              <div className="p-4 rounded-full bg-red-950/60 border-2 border-red-500 mb-6 animate-pulse">
+                <Lock className="w-10 h-10 md:w-16 md:h-16 text-[#ef4444]" />
+              </div>
+              
+              <h2 className="text-3xl md:text-5xl font-black text-[#ef4444] tracking-widest uppercase mb-4">
+                SECURITY OVERRIDE
+              </h2>
+              <p className="text-zinc-400 text-lg md:text-2xl font-bold mb-8">
+                AUTHORIZATION REQUIRED TO PURGE LIVE DATABASE
+              </p>
+
+              <form onSubmit={handleAuthAndReset} className="w-full space-y-6">
+                <input 
+                  type="password"
+                  value={passwordInput}
+                  onChange={(e) => setPasswordInput(e.target.value)}
+                  placeholder="ENTER SECURITY PASSPHRASE..."
+                  disabled={isResetting || resetSuccess}
+                  className="w-full bg-black text-center text-red-500 border-2 border-red-500/40 rounded-2xl px-6 py-5 focus:outline-none focus:border-[#ef4444] text-xl md:text-3xl font-extrabold tracking-widest placeholder:text-red-950 focus:ring-4 focus:ring-red-500/20"
+                />
+
+                {resetError && (
+                  <div className="p-4 bg-red-950/80 border border-red-500 rounded-xl text-red-400 font-extrabold text-sm md:text-lg tracking-wide uppercase">
+                    ❌ {resetError}
+                  </div>
+                )}
+
+                {resetSuccess && (
+                  <div className="p-4 bg-green-950/80 border border-green-500 rounded-xl text-green-400 font-extrabold text-sm md:text-lg tracking-wide uppercase animate-pulse">
+                    ✅ DATABASE PURGED SUCCESSFULLY
+                  </div>
+                )}
+
+                <div className="flex space-x-4 pt-4">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setShowResetModal(false);
+                      setResetError('');
+                      setResetSuccess(false);
+                    }}
+                    className="flex-1 py-4 md:py-6 rounded-2xl border-2 border-zinc-700 hover:border-white text-zinc-400 hover:text-white text-lg md:text-2xl font-black transition-all"
+                  >
+                    CANCEL
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={isResetting || resetSuccess}
+                    className="flex-1 py-4 md:py-6 rounded-2xl bg-[#ef4444] hover:bg-red-500 text-black text-lg md:text-2xl font-black tracking-wider transition-all active:scale-95 disabled:opacity-50"
+                  >
+                    {isResetting ? 'PURGING...' : 'PURGE ALL'}
+                  </button>
+                </div>
+              </form>
+            </div>
+
+          </div>
+        </div>
+      )}
 
       {/* Absolute maximum contrast projector text glow utility declarations */}
       <style>{`
