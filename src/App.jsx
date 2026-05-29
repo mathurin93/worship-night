@@ -133,7 +133,7 @@ export default function App() {
               PRAISE NIGHT
             </h1>
           </div>
-          <div className={`w-4 h-4 md:w-6 md:h-6 rounded-full ${accent === 'neon-orange' ? 'bg-[#ff6a00] shadow-[0_0_15px_4px_rgba(255,106,0,0.8)]' : accent === 'neon-pink' ? 'bg-[#ff007f] shadow-[0_0_15px_4px_rgba(255,0,127,0.8)]' : 'bg-[#a3e635] shadow-[0_0_15px_4px_rgba(163,230,53,0.8)]'} animate-pulse`} />
+          <div className={`w-4 h-4 md:w-6 md:h-6 rounded-full ${accent === 'neon-orange' ? 'bg-[#ff6a00] md:shadow-[0_0_15px_4px_rgba(255,106,0,0.8)]' : accent === 'neon-pink' ? 'bg-[#ff007f] md:shadow-[0_0_15px_4px_rgba(255,0,127,0.8)]' : 'bg-[#a3e635] md:shadow-[0_0_15px_4px_rgba(163,230,53,0.8)]'} animate-pulse`} />
         </div>
         
         {/* Error Notification Bar - High Contrast Red Alert Panel */}
@@ -184,7 +184,7 @@ export default function App() {
       {/* Main Content Area - WIDE SCREEN FOR LANDSCAPE PROJECTORS */}
       <main className="flex-1 w-[95%] max-w-[1800px] mx-auto p-5 md:p-8 flex flex-col z-10 relative">
         
-        {}
+        {/* PRAISES TAB */}
         {activeTab === 'praise' && (
           <div className="flex flex-col h-full animate-fade-in">
             <div className="mb-6 md:mb-12 text-center animate-slide-down">
@@ -196,11 +196,11 @@ export default function App() {
               {comments.map((comment, index) => (
                 <div 
                   key={comment.id} 
-                  className="bg-zinc-950 p-6 md:p-12 rounded-3xl border-3 border-[#ff6a00]/40 hover:border-[#ff6a00] shadow-[0_0_35px_rgba(255,106,0,0.25)] transition-all duration-300 flex items-center group opacity-0 animate-slide-up-fade"
+                  className="bg-zinc-950 p-6 md:p-12 rounded-3xl border-3 border-[#ff6a00]/40 hover:border-[#ff6a00] md:shadow-[0_0_35px_rgba(255,106,0,0.25)] shadow-none transition-all duration-300 flex items-center group opacity-0 animate-slide-up-fade"
                   style={{ animationDelay: `${index * 0.08}s`, animationFillMode: 'forwards' }}
                 >
                   <div className="mr-6 md:mr-10 p-4 md:p-6 rounded-full bg-orange-950/60 border-2 border-[#ff6a00]/50 group-hover:scale-110 transition-transform">
-                    <Heart className="text-[#ff6a00] w-8 h-8 md:w-14 md:h-14 filter-orange-glow" />
+                    <Heart className="text-[#ff6a00] w-8 h-8 md:w-14 md:h-14 md:filter-orange-glow" />
                   </div>
                   {/* PROJECTOR ULTRA CONTRAST GOLD TEXT WITH NEON TEXT SHADOW */}
                   <span className="text-2xl md:text-5xl lg:text-6xl leading-relaxed font-black text-[#facc15] neon-gold-text">
@@ -233,7 +233,7 @@ export default function App() {
           </div>
         )}
 
-        {}
+        {/* QUESTIONS TAB */}
         {activeTab === 'questions' && (
           <div className="flex flex-col h-full animate-fade-in">
             <div className="mb-6 md:mb-12 text-center animate-slide-down">
@@ -245,11 +245,11 @@ export default function App() {
               {questions.map((question, index) => (
                 <div 
                   key={question.id} 
-                  className="bg-zinc-950 p-6 md:p-12 rounded-3xl border-3 border-[#ff007f]/40 hover:border-[#ff007f] shadow-[0_0_35px_rgba(255,0,127,0.25)] transition-all duration-300 flex items-start group opacity-0 animate-slide-up-fade"
+                  className="bg-zinc-950 p-6 md:p-12 rounded-3xl border-3 border-[#ff007f]/40 hover:border-[#ff007f] md:shadow-[0_0_35px_rgba(255,0,127,0.25)] shadow-none transition-all duration-300 flex items-start group opacity-0 animate-slide-up-fade"
                   style={{ animationDelay: `${index * 0.08}s`, animationFillMode: 'forwards' }}
                 >
                   <div className="mr-6 md:mr-10 p-4 md:p-6 rounded-xl bg-pink-950/60 border-2 border-[#ff007f]/50 flex-shrink-0 mt-1 group-hover:scale-110 transition-transform">
-                    <HelpCircle className="text-[#ff007f] w-8 h-8 md:w-14 md:h-14 filter-pink-glow" />
+                    <HelpCircle className="text-[#ff007f] w-8 h-8 md:w-14 md:h-14 md:filter-pink-glow" />
                   </div>
                   {/* PROJECTOR ULTRA CONTRAST GOLD TEXT WITH NEON TEXT SHADOW */}
                   <span className="text-2xl md:text-5xl lg:text-6xl leading-relaxed font-black text-[#facc15] neon-gold-text">
@@ -282,13 +282,13 @@ export default function App() {
           </div>
         )}
 
-        {}
+        {/* DEVOTION TAB */}
         {activeTab === 'devotion' && (
-          <div className="bg-zinc-950 p-8 md:p-20 rounded-3xl border-4 border-[#a3e635] mb-8 mt-6 opacity-0 animate-slide-up-fade relative shadow-[0_0_50px_rgba(163,230,53,0.3)]" style={{ animationFillMode: 'forwards' }}>
-            {/* Projector System Details Header */}
-            <div className="absolute top-6 right-6 text-sm md:text-2xl font-mono text-[#a3e635] tracking-widest font-extrabold neon-lime-text">WISDOM // LOG [0100]</div>
+          <div className="bg-zinc-950 pt-16 pb-8 px-6 md:p-20 rounded-3xl border-4 border-[#a3e635] mb-8 mt-6 opacity-0 animate-slide-up-fade relative md:shadow-[0_0_50px_rgba(163,230,53,0.3)] shadow-none" style={{ animationFillMode: 'forwards' }}>
+            {/* Projector System Details Header - Repositioned cleanly to avoid overlaying title text on mobile */}
+            <div className="absolute top-4 right-6 text-xs md:text-2xl font-mono text-[#a3e635] tracking-widest font-extrabold neon-lime-text">WISDOM // LOG [0100]</div>
             
-            <h2 className="text-4xl md:text-7xl lg:text-8xl font-black text-[#a3e635] mb-12 text-center tracking-widest border-b-4 border-[#a3e635]/30 pb-10 uppercase neon-lime-text">What is True Praise?</h2>
+            <h2 className="text-4xl md:text-7xl lg:text-8xl font-black text-[#a3e635] mt-4 mb-12 text-center tracking-widest border-b-4 border-[#a3e635]/30 pb-10 uppercase neon-lime-text">What is True Praise?</h2>
             
             <div className="space-y-12 md:space-y-20 text-2xl md:text-4xl lg:text-5xl text-white leading-relaxed font-bold">
               <div className="flex items-start space-x-6">
@@ -309,11 +309,11 @@ export default function App() {
               </p>
 
               <h3 className="text-4xl md:text-6xl font-black text-[#a3e635] pt-12 tracking-wide flex items-center space-x-5 border-t border-zinc-800">
-                <Zap className="text-[#a3e635] w-12 h-12 md:w-20 md:h-20 animate-pulse flex-shrink-0 filter-lime-glow" />
+                <Zap className="text-[#a3e635] w-12 h-12 md:w-20 md:h-20 animate-pulse flex-shrink-0 md:filter-lime-glow" />
                 <span className="neon-lime-text">PSALM 100 (A Psalm for Giving Thanks)</span>
               </h3>
               
-              <blockquote className="border-l-12 border-[#a3e635] pl-10 md:pl-16 py-10 my-12 bg-zinc-900 rounded-r-3xl italic space-y-8 font-extrabold text-zinc-100 text-3xl md:text-5xl shadow-[0_0_30px_rgba(163,230,53,0.15)]">
+              <blockquote className="border-l-12 border-[#a3e635] pl-10 md:pl-16 py-10 my-12 bg-zinc-900 rounded-r-3xl italic space-y-8 font-extrabold text-zinc-100 text-3xl md:text-5xl md:shadow-[0_0_30px_rgba(163,230,53,0.15)] shadow-none">
                 <p><strong className="text-[#a3e635] mr-6 neon-lime-text">1</strong> Make a joyful noise to the LORD, all the earth!</p>
                 <p><strong className="text-[#a3e635] mr-6 neon-lime-text">2</strong> Serve the LORD with gladness! Come into his presence with singing!</p>
                 <p><strong className="text-[#a3e635] mr-6 neon-lime-text">3</strong> Know that the LORD, he is God! It is he who made us, and we are his; we are his people, and the sheep of his pasture.</p>
@@ -322,7 +322,7 @@ export default function App() {
               </blockquote>
 
               <h3 className="text-4xl md:text-6xl font-black text-[#a3e635] pt-12 tracking-wide flex items-center space-x-5 border-t border-zinc-800">
-                <Sparkles className="text-[#a3e635] w-12 h-12 md:w-20 md:h-20 animate-pulse flex-shrink-0 filter-lime-glow" />
+                <Sparkles className="text-[#a3e635] w-12 h-12 md:w-20 md:h-20 animate-pulse flex-shrink-0 md:filter-lime-glow" />
                 <span className="neon-lime-text">PERSONAL REFLECTION</span>
               </h3>
               <ul className="list-disc pl-12 md:pl-20 space-y-8 text-zinc-200">
@@ -334,36 +334,47 @@ export default function App() {
         )}
       </main>
 
-      {}
       {/* Absolute maximum contrast projector text glow utility declarations */}
       <style>{`
-        /* Custom neon text glows for extreme readability on screen projection */
+        /* Default high-contrast colors (no text-shadow for ultra-crisp mobile displays) */
         .neon-orange-text {
           color: #ff6a00 !important;
-          text-shadow: 0 0 10px rgba(255, 106, 0, 0.8), 0 0 20px rgba(255, 106, 0, 0.4);
         }
         .neon-pink-text {
           color: #ff007f !important;
-          text-shadow: 0 0 10px rgba(255, 0, 127, 0.8), 0 0 20px rgba(255, 0, 127, 0.4);
         }
         .neon-lime-text {
           color: #a3e635 !important;
-          text-shadow: 0 0 10px rgba(163, 230, 53, 0.8), 0 0 20px rgba(163, 230, 53, 0.4);
         }
         .neon-gold-text {
           color: #facc15 !important;
-          text-shadow: 0 0 10px rgba(250, 204, 21, 0.9), 0 0 20px rgba(250, 204, 21, 0.5);
         }
 
-        /* SVG Glow filters */
-        .filter-orange-glow {
-          filter: drop-shadow(0px 0px 8px rgba(255,106,0,0.8));
-        }
-        .filter-pink-glow {
-          filter: drop-shadow(0px 0px 8px rgba(255,0,127,0.8));
-        }
-        .filter-lime-glow {
-          filter: drop-shadow(0px 0px 8px rgba(163,230,53,0.8));
+        /* Ambient text glows optimized strictly for desktop screens (Projectors >= 768px) */
+        @media (min-width: 768px) {
+          .neon-orange-text {
+            text-shadow: 0 0 10px rgba(255, 106, 0, 0.8), 0 0 20px rgba(255, 106, 0, 0.4);
+          }
+          .neon-pink-text {
+            text-shadow: 0 0 10px rgba(255, 0, 127, 0.8), 0 0 20px rgba(255, 0, 127, 0.4);
+          }
+          .neon-lime-text {
+            text-shadow: 0 0 10px rgba(163, 230, 53, 0.8), 0 0 20px rgba(163, 230, 53, 0.4);
+          }
+          .neon-gold-text {
+            text-shadow: 0 0 10px rgba(250, 204, 21, 0.9), 0 0 20px rgba(250, 204, 21, 0.5);
+          }
+          
+          /* Glow filter rendering for SVG icons */
+          .filter-orange-glow {
+            filter: drop-shadow(0px 0px 8px rgba(255,106,0,0.8));
+          }
+          .filter-pink-glow {
+            filter: drop-shadow(0px 0px 8px rgba(255,0,127,0.8));
+          }
+          .filter-lime-glow {
+            filter: drop-shadow(0px 0px 8px rgba(163,230,53,0.8));
+          }
         }
 
         /* Border definition adjustment */
